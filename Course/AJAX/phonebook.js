@@ -18,7 +18,7 @@ function loadData() {
 
     function handleSuccess(res) {
         for (let key in res) {
-            generateLi(res[key].name, res[key].phone, key)
+            generateLi(res[key].name, res[key].phone, key);
         }
     }
 }

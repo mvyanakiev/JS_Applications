@@ -2,10 +2,8 @@ const URL = 'https://phonebook-ab10b.firebaseio.com/';
 const person = $('#person');
 const phone = $('#phone');
 
-
 $('#btnLoad').on("click", loadData);
 $('#btnCreate').on("click", postData);
-
 
 function loadData() {
     $('#phonebook').empty();
@@ -22,7 +20,6 @@ function loadData() {
         }
     }
 }
-
 
 function postData() {
     let name = person.val();
@@ -44,9 +41,7 @@ function postData() {
 
     person.val('');
     phone.val('');
-
 }
-
 
 function generateLi(name, phone, key) {
     let li = $(`<li>${name}: ${phone} </li>`).append($('<a href="#">[Delete]</a>'))

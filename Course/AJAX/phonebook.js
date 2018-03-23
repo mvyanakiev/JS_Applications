@@ -1,7 +1,10 @@
 const URL = 'https://phonebook-ab10b.firebaseio.com/';
+const person = $('#person');
+const phone = $('#phone');
 
 
 $('#btnLoad').on("click", loadData);
+$('#btnCreate').on("click", postData);
 
 
 function loadData() {
@@ -9,29 +12,55 @@ function loadData() {
 
     $.ajax({
         method: "GET",
+        url: URL + '.json'
+    }).then(handleSuccess)
+        .catch(handleError);
+
+    function handleSuccess(res) {
+        for (let key in res) {
+            generateLi(res[key].name, res[key].phone, key)
+        }
+    }
+}
+
+
+function postData() {
+    let name = person.val();
+    let phoneVal = phone.val();
+    let postData = JSON.stringify({'name': name, 'phone': phoneVal});
+
+    $.ajax({
+        method: 'POST',
         url: URL + '.json',
-        success: handleSuccess,
+        data: postData,
+        success: appendElement,
         error: handleError
     });
 
-    function handleSuccess(res) {
-
-        console.log(res);
-
-        //
-        // for (let key of res) {
-        //     $('#phonebook').append(
-        //         $(`<li>${res[key].name}: tel </li>`)
-        //             .append($('<a href="#" > [Delete] < /a>')
-        //             ))
-        // }
+    function appendElement(res) {
+        generateLi(name, phoneVal, res.name)
 
     }
+
+    person.val('');
+    phone.val('');
 
 }
 
 
-function handleError(res) {
-    console.log(res);
+function generateLi(name, phone, key) {
+    let li = $(`<li>${name}: ${phone} </li>`).append($('<a href="#">[Delete]</a>'))
+        .click(function () {
+            $.ajax({
+                method: 'DELETE',
+                url: URL + '/' + key + '.json'
+            }).then(() => $(li).remove())
+                .catch(handleError)
+        });
 
+    $('#phonebook').append(li);
+}
+
+function handleError(err) {
+    console.log(err);
 }

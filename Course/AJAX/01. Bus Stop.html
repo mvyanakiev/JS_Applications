@@ -26,7 +26,7 @@
 </div>
 <script>
     function getInfo() {
-        $('#buses').empty()
+        $('#buses').empty();
         let stopId = $('#stopId').val();
         let resultStop = $('#stopName');
 
@@ -37,24 +37,21 @@
             error: handleError
         });
 
-        function handleSuccess(res) {
 
-            resultStop.text(res.name);
+        function handleSuccess(result) {
 
-            for (let key in res.buses) {
+            resultStop.text(result.name);
 
-                let addToList = `<li>Bus ${key} arrives in ${res.buses[key]} minutes</li>`;
+            for (let key in result.buses) {
+
+                let addToList = `<li>Bus ${key} arrives in ${result.buses[key]} minutes</li>`;
                 $('#buses').append(addToList);
-
             }
-
         }
 
         function handleError() {
             resultStop.text("Error");
-
         }
-
     }
 </script>
 </body>

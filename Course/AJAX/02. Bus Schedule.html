@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <title>Bus Schedule</title>
     <style>
-        #schedule { text-align: center; width: 400px; }
-        input { width: 120px; }
-        #info { background-color:aquamarine; border:1px solid black; margin:0.25em; }
-        .info { font-size: 1.5em; padding: 0.25em; }
+        #schedule {
+            text-align: center;
+            width: 400px;
+        }
+
+        input {
+            width: 120px;
+        }
+
+        #info {
+            background-color: aquamarine;
+            border: 1px solid black;
+            margin: 0.25em;
+        }
+
+        .info {
+            font-size: 1.5em;
+            padding: 0.25em;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
@@ -20,19 +35,46 @@
     </div>
 </div>
 <script>
+
+
     function solve() {
+        let currentStopId = 'depot';
+        let cuurrentStopName = "";
+        let baseUrl = "https://judgetests.firebaseio.com/schedule/";
 
+        function depart() {
 
+            let url = baseUrl + currentStopId + ".json";
+            $.get(url).then(updateInfo)
 
+        }
 
+        function updateInfo(data) {
+            $('span.info').text("Next stop " + data.name);
+            currentStopId = data.next;
+            cuurrentStopName = data.name;
+            $('#depart').attr('disabled', true);
+            $('#arrive').attr('disabled', false);
+        }
 
-        // TODO ...
+        function arrive() {
+
+            $('#arrive').attr('disabled', true);
+            $('#depart').attr('disabled', false);
+            $('span.info').text("Arriving at " + cuurrentStopName);
+        }
+
         return {
             depart,
             arrive
         };
     }
+
+
+
     let result = solve();
+
+
 </script>
 </body>
 </html>

@@ -1,7 +1,12 @@
 function attachEvents() {
+
     $('#submit').on('click', getWeather);
 
+
     function getWeather() {
+
+
+
 
         $.get({
             url: "https://judgetests.firebaseio.com/locations.json",
@@ -11,6 +16,9 @@ function attachEvents() {
     }
 
     function getCode(data) {
+        $('#current').empty();
+        $('#upcoming').empty();
+
         let nameCity = $('#location').val();
         let cityCode = null;
 
@@ -62,10 +70,8 @@ function attachEvents() {
             </span>
         `;
 
-
         $('#forecast').css("display", "inline");
         $('#current').append(weatherHtml);
-
     }
 
     function forecastSymbol(param) {
@@ -102,7 +108,7 @@ function attachEvents() {
     }
 
     function err() {
-        $('#forecast').css("display", "inline").text("Error");
+        $('#current').css("display", "inline").text("Маймун");
     }
 
 }

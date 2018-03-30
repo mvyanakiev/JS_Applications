@@ -14,7 +14,6 @@ function attachEvents() {
         }).then(loadData).catch(handleError)
     });
 
-
     $('.add').on("click", () => {
 
         let dataToPost = {
@@ -33,7 +32,7 @@ function attachEvents() {
             },
             url: URL + "/biggestCatches",
             data: dataToPost,
-        }).then(clearForm).catch(handleError)
+        }).then(added).catch(handleError)
 
     });
 
@@ -41,11 +40,9 @@ function attachEvents() {
 
         $('#catches').empty();
 
-        let dataToappend = "";
-
         for (let obj of res) {
 
-            dataToappend = `
+            let dataToappend = `
             <div class="catch" data-id="${obj._id}">
             <label>Angler</label>
             <input type="text" class="angler" value="${obj.angler}"/>
@@ -53,33 +50,60 @@ function attachEvents() {
             <input type="number" class="weight" value="${obj.weight}"/>
             <label>Species</label>
             <input type="text" class="species" value="${obj.species}"/>
-            <label>Хванах рибата на:</label>
+            <label>Location</label>
             <input type="text" class="location" value="${obj.location}"/>
             <label>Bait</label>
             <input type="text" class="bait" value="${obj.bait}"/>
             <label>Capture Time</label>
             <input type="number" class="captureTime" value="${obj.captureTime}"/>
             <button class="update">Update</button>
-            <button class="delete">Delete</button>
+            <button class="delete" id="${obj._id}">Delete</button>
         </div>`;
 
             $('#catches').append(dataToappend);
 
-
-            //todo заиграй се с this-а за бутоните update & delete - да хваща id-то и да пуска заявака за edit/delete
-
-            // $('#catches .delete').on('click', () => {
-            //
-            //    let tva = $('#catches .angler').val();
-            //    alert(tva);
-            //
-            // })
-
+            $('#' + obj._id).on('click',
+                deleteElement.bind(obj._id)
+            );
 
 
         }
     }
 
+
+    function updateElement(event) {
+    }
+
+
+
+    function deleteElement() {
+        let currentId = this;
+
+        let request = {
+            method: 'DELETE',
+            url: "https://baas.kinvey.com/appdata/kid_rJnpHCvcM/biggestCatches/" +currentId,
+            headers: {
+                "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
+            },
+        };
+        $.ajax(request)
+            .then(added)
+            .catch(handleError);
+    }
+    function added() {
+
+        (function loading() {
+            $.ajax({
+                method: "GET",
+                url: URL + "/biggestCatches",
+                headers: {
+                    "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
+                },
+            }).then(loadData).catch(handleError)
+        })();
+
+        clearForm();
+    }
     function clearForm() {
         $('#addForm .angler').val("");
         $('#addForm .weight').val("");
@@ -92,6 +116,8 @@ function attachEvents() {
         console.log(myEr.status);
         console.log(myEr.statusText);
     }
+
+
 }
 
 

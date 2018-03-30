@@ -56,7 +56,7 @@ function attachEvents() {
             <input type="text" class="bait" value="${obj.bait}"/>
             <label>Capture Time</label>
             <input type="number" class="captureTime" value="${obj.captureTime}"/>
-            <button class="update">Update</button>
+            <button class="update" id="${obj._id}">Update</button>
             <button class="delete" id="${obj._id}">Delete</button>
         </div>`;
 
@@ -66,12 +66,18 @@ function attachEvents() {
                 deleteElement.bind(obj._id)
             );
 
+            $('#' + obj._id).on('click',
+                updateElement.bind(obj._id)
+            );
+
 
         }
     }
 
 
-    function updateElement(event) {
+    function updateElement() {
+
+        console.log(this);
     }
 
 

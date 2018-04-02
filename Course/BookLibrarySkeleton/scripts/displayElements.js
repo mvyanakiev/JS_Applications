@@ -1,6 +1,6 @@
 function showView(viewName) {
-    $('main > section').hide() // Hide all views
-    $('#' + viewName).show() // Show the selected view only
+    $('main > section').hide(); // Hide all views
+    $('#' + viewName).show(); // Show the selected view only
 }
 
 function showHideMenuLinks() {
@@ -11,6 +11,7 @@ function showHideMenuLinks() {
         $("#linkListBooks").hide()
         $("#linkCreateBook").hide()
         $("#linkLogout").hide()
+        $("#loggedInUser").text("")
     } else { // We have logged in user
         $("#linkLogin").hide()
         $("#linkRegister").hide()

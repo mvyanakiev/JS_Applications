@@ -56,38 +56,51 @@ function attachEvents() {
             <input type="text" class="bait" value="${obj.bait}"/>
             <label>Capture Time</label>
             <input type="number" class="captureTime" value="${obj.captureTime}"/>
-            <button class="update" id="${obj._id}">Update</button>
-            <button class="delete" id="${obj._id}">Delete</button>
-        </div>`;
+            <button class="update">Update</button>
+          <button class="delete" >Delete</button>
+       </div>`;
 
             $('#catches').append(dataToappend);
 
-            $('#' + obj._id).on('click',
-                deleteElement.bind(obj._id)
+            $('.delete').on('click',
+                deleteElement
             );
 
-            $('#' + obj._id).on('click',
-                updateElement.bind(obj._id)
+            $('.update').on('click',
+                updateElement
             );
-
-
         }
     }
+    function updateElement(ev) {
+        let currentId = $(ev.target).parent().attr('data-id');
+        let currentDiv = $(this).parent();
 
+        let dataToPost = {
+            angler: currentDiv.find('.angler').val(),
+            weight: Number(currentDiv.find('.weight').val()),
+            species: currentDiv.find('.species').val(),
+            location: currentDiv.find('.location').val(),
+            bait: currentDiv.find('.bait').val(),
+            captureTime: Number(currentDiv.find('.captureTime').val())
+        };
+            let request = {
+            method: 'PUT',
+            url: "https://baas.kinvey.com/appdata/kid_rJnpHCvcM/biggestCatches/" + currentId,
+            headers: {
+                "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
+            },
+            data: dataToPost,
+        };
+        $.ajax(request)
+            .then(added)
+            .catch(handleError);
 
-    function updateElement() {
-
-        console.log(this);
     }
-
-
-
-    function deleteElement() {
-        let currentId = this;
-
+    function deleteElement(ev) {
+        let currentId = $(ev.target).parent().attr('data-id');
         let request = {
             method: 'DELETE',
-            url: "https://baas.kinvey.com/appdata/kid_rJnpHCvcM/biggestCatches/" +currentId,
+            url: "https://baas.kinvey.com/appdata/kid_rJnpHCvcM/biggestCatches/" + currentId,
             headers: {
                 "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
             },
@@ -122,8 +135,6 @@ function attachEvents() {
         console.log(myEr.status);
         console.log(myEr.statusText);
     }
-
-
 }
 
 

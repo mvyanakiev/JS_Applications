@@ -116,6 +116,11 @@ function editBook() {
 function saveAuthInSession(userInfo) {
 }
 
+function cancelEditBook() {
+    console.log("cancel");
+    listBooks();
+}
+
 function logoutUser() {
     sessionStorage.clear();
     showHideMenuLinks();

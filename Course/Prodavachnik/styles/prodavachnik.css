@@ -6,6 +6,7 @@
 body{
     font-family: 'Open Sans', sans-serif;
     color: #333333;
+    background: darkgray;
     height: 100%;
 }
 
@@ -21,6 +22,10 @@ body{
     display: none;
     text-decoration: none;
     padding: 5px 20px;
+}
+
+#loggedInUser {
+    display: inline-block;
 }
 
 .menu-item {
@@ -45,7 +50,6 @@ main > section {
     display: none;
     padding: 20px 5px;
 }
-
 
 .title{
     text-align: center;

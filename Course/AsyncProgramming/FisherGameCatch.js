@@ -96,6 +96,7 @@ function attachEvents() {
             .catch(handleError);
 
     }
+
     function deleteElement(ev) {
         let currentId = $(ev.target).parent().attr('data-id');
         let request = {

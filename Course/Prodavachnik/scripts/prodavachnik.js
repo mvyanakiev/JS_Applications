@@ -215,8 +215,8 @@ function startApp() {
         //todo правиш я асинхронна и докато зарежда да показва лоадинг
 
         ads = ads.reverse();
-        $('#ads').empty();
-        $('#ads').append('<table id="adsTable">');
+        // $('#ads').empty();
+        $('#ads').html('<table id="adsTable">');
         let adsTable = $('#adsTable');
 
         let th = "<tr>";
@@ -258,10 +258,9 @@ function startApp() {
             url: baseUrl + 'appdata/' + appKey + '/ads/' + currentId,
             headers: {'Authorization': "Kinvey " + localStorage.getItem('authtoken')},
             success: function () {
-                loadAdsFromKinvey
+                loadAdsFromKinvey();
                 showInfoBox("Add deleted successful");
-
-            }
+            },
             error: errorProd,
         });
     }
@@ -269,8 +268,10 @@ function startApp() {
     function editElement(ev) {
         let currentId = $(ev.target).attr('name');
 
-
+// todo add edit functions
         console.log("edt " + currentId);
+
+
     }
 
     function validate(dataToPost) {
@@ -327,5 +328,4 @@ function startApp() {
             box.fadeOut()
         }, 3000)
     }
-
 }

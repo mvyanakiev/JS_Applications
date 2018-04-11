@@ -1,6 +1,5 @@
 function startApp() {
 
-
     $('header').find('a').show();
 
     function showView(view) {
@@ -36,7 +35,6 @@ function startApp() {
                 break;
         }
 
-
     }
 
     function navigateTo(e) {
@@ -53,16 +51,11 @@ function startApp() {
     $('#linkListAds').on("click", loadAdsFromKinvey);
     $('#linkLogout').on("click", logout);
 
-
     const appKey = 'kid_Bk1jUzfof';
     const appSecret = 'dbb2217fa20f49bfadd86cef791597cb';
     const baseUrl = 'https://baas.kinvey.com/';
 
     let requester = (() => {
-
-        // const appKey = 'kid_Bk1jUzfof';
-        // const appSecret = 'dbb2217fa20f49bfadd86cef791597cb';
-        // const baseUrl = 'https://baas.kinvey.com/';
 
         function makeAuth(type) {
             if (type === 'basic') return 'Basic ' + btoa(appKey + ':' + appSecret);
@@ -212,10 +205,7 @@ function startApp() {
 
     function listAds(ads) {
 
-        //todo правиш я асинхронна и докато зарежда да показва лоадинг
-
         ads = ads.reverse();
-        // $('#ads').empty();
         $('#ads').html('<table id="adsTable">');
         let adsTable = $('#adsTable');
 
@@ -238,6 +228,10 @@ function startApp() {
             tr += `<td>${ads[i].price}</td>`;
             tr += `<td>${ads[i].date}</td>`;
             tr += `<td>`;
+
+            // todo да криеш edit и delete
+
+
             tr += `<a href="#" class="delete" name="${ads[i]._id}">[Delete]</a>`;
             tr += `<a href="#" class="edit" name="${ads[i]._id}">[Edit]</a>`;
             tr += `</td>`;
@@ -246,7 +240,7 @@ function startApp() {
         }
 
         $('.delete').on('click', deleteElement);
-        $('.edit').on('click', editElement);
+        $('.edit').on('click', getAdForEdit);
     }
 
 
@@ -265,16 +259,75 @@ function startApp() {
         });
     }
 
-    function editElement(ev) {
+    function getAdForEdit(ev) {
+
         let currentId = $(ev.target).attr('name');
 
-// todo add edit functions
-        console.log("edt " + currentId);
+        $.ajax({
+            method: "GET",
+            url: baseUrl + 'appdata/' + appKey + '/ads/' + currentId,
+            headers: {'Authorization': "Kinvey " + localStorage.getItem('authtoken')},
+            success: loadAdForEdit,
+            error: errorProd,
+        });
 
 
     }
 
+    function loadAdForEdit(data) {
+        showView('edit');
+
+        let form = $('#formEditAd');
+
+        // let fromForm = {
+            title: form.find('input[name="title"]').val(data.title);
+            description: form.find('textarea[name="description"]').val(data.description);
+            date: form.find('input[name="datePublished"]').val(data.date);
+            price: form.find('input[name="price"]').val(data.price);
+            // publisher: form.find('input[name="publisher"]').val(data.public);
+            id: form.find('input[name="id"]').val(data._id);
+        // };
+
+
+        $('#buttonEditAd').on("click", function postDetails() {
+
+
+            let dataToPost = {
+                title: form.find('input[name="title"]').val(),
+                description: form.find('textarea[name="description"]').val(),
+                date: form.find('input[name="datePublished"]').val(),
+                price: form.find('input[name="price"]').val(),
+                // publisher: form.find('input[name="publisher"]').val(),
+                id: form.find('input[name="id"]').val(),
+            };
+
+
+
+
+            console.log(dataToPost);
+
+            if (validate(dataToPost)) {
+
+                console.log("Valid");
+
+
+            $.ajax({
+                method: "PUT",
+                data: dataToPost,
+                url: baseUrl + 'appdata/' + appKey + '/ads/' + dataToPost.id,
+                headers: {'Authorization': "Kinvey " + localStorage.getItem('authtoken')},
+                success: loadAdsFromKinvey,
+                error: errorProd,
+            });
+
+            }
+
+        });
+    }
+
+
     function validate(dataToPost) {
+
 
         if ((dataToPost.title !== "") &&
             (dataToPost.description !== "") &&

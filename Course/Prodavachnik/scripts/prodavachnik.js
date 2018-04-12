@@ -235,7 +235,6 @@ function startApp() {
 
         adsTable.append(th);
 
-        console.log("user from session is: " + localStorage.getItem("id"));
 
         for (let i = 0; i < ads.length; i++) {
             let tr = `<tr>`;
@@ -246,12 +245,11 @@ function startApp() {
             tr += `<td>${ads[i].date}</td>`;
             tr += `<td>`;
 
-            console.log("user id from base is is : " + ads[i]._acl.creator);
-
-            if (localStorage.getItem("username") === ads[i].publisher) {
+            if (localStorage.getItem("id") === ads[i]._acl.creator) {
                 tr += `<a href="#" class="delete" name="${ads[i]._id}">[Delete]</a>`;
                 tr += `<a href="#" class="edit" name="${ads[i]._id}">[Edit]</a>`;
             }
+
             tr += `</td>`;
             tr += `</tr>`;
             adsTable.append(tr);
@@ -382,13 +380,29 @@ function startApp() {
         clearTimeout(box);
     }
 
+    // function errorProd(response) {
+    //     let errorMsg = JSON.stringify(response);
+    //     if (response.readyState === 0)
+    //         errorMsg = "Cannot connect due to network error.";
+    //     if (response.responseJSON &&
+    //         response.responseJSON.description)
+    //         errorMsg = response.responseJSON.description;
+    //     showError(errorMsg);
+    // }
+    //
+    // function showError(errorMsg) {
+    //     $('#errorBox').text("Error: " + errorMsg);
+    //     $('#errorBox').show();
+    // }
+
+
     function showInfoBox(infoMsg) {
         let box = $('#infoBox');
         box.text(infoMsg);
         box.show();
         setTimeout(function () {
             box.fadeOut()
-        }, timeOut)
+        }, timeOut);
         clearTimeout(box);
 
     }

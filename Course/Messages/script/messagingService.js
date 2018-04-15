@@ -29,7 +29,7 @@ let messagesService = (() => {
         loadMyMessage,
         loadArchiveMessage,
         deleteMessage,
-        sendingMessage
+        sendingMessage,
     }
 
 

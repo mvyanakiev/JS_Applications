@@ -5,22 +5,26 @@
     <meta charset="utf-8" />
     <title>Messages</title>
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="messages.js"></script>
+    <script src="script/messages.js"></script>
+    <script src="script/requester.js"></script>
+    <script src="script/auth.js"></script>
+    <script src="script/messagingService.js"></script>
     <link rel="stylesheet" type="text/css" href="messages.css" />
 </head>
 
-<body onload="messages()">
+<body>
+<!--onload="messages()"-->
 
 <div id="app">
     <header id="menu">
-        <a href="#" class="anonymous" id="linkMenuAppHome">Home</a>
-        <a href="#" class="anonymous" id="linkMenuLogin">Login</a>
-        <a href="#" class="anonymous" id="linkMenuRegister">Register</a>
+        <a href="#" class="anonymous" id="linkMenuAppHome" data-target="AppHome">Home</a>
+        <a href="#" class="anonymous" id="linkMenuLogin" data-target="Login">Login</a>
+        <a href="#" class="anonymous" id="linkMenuRegister" data-target="Register">Register</a>
 
-        <a href="#" class="useronly" id="linkMenuUserHome">Home</a>
-        <a href="#" class="useronly" id="linkMenuMyMessages">My Messages</a>
-        <a href="#" class="useronly" id="linkMenuArchiveSent">Archive (Sent)</a>
-        <a href="#" class="useronly" id="linkMenuSendMessage">Send Message</a>
+        <a href="#" class="useronly" id="linkMenuUserHome"data-target="UserHome">Home</a>
+        <a href="#" class="useronly" id="linkMenuMyMessages" data-target="MyMessages">My Messages</a>
+        <a href="#" class="useronly" id="linkMenuArchiveSent" data-target="ArchiveSent">Archive (Sent)</a>
+        <a href="#" class="useronly" id="linkMenuSendMessage" data-target="SendMessage">Send Message</a>
         <a href="#" class="useronly" id="linkMenuLogout">Logout</a>
 
         <span class="useronly" id="spanMenuLoggedInUser">Welcome, {user}!</span>
@@ -78,9 +82,9 @@
 
         <section id="viewUserHome">
             <h1 id="viewUserHomeHeading">Welcome, {user}!</h1>
-            <a href="#" id="linkUserHomeMyMessages">My Messages</a>
-            <a href="#" id="linkUserHomeSendMessage">Send Message</a>
-            <a href="#" id="linkUserHomeArchiveSent">Archive (Sent)</a>
+            <a href="#" id="linkUserHomeMyMessages" data-target="MyMessages">My Messages</a>
+            <a href="#" id="linkUserHomeSendMessage" data-target="SendMessage">Send Message</a>
+            <a href="#" id="linkUserHomeArchiveSent" data-target="ArchiveSent">Archive (Sent)</a>
         </section>
 
         <section id="viewMyMessages">
@@ -138,6 +142,8 @@
                         <th>Actions</th>
                     </tr>
                     </thead>
+
+
                     <tbody>
                     <tr>
                         <td>peter</td>
@@ -157,8 +163,10 @@
                         <td>9.06.2016 19:55:59</td>
                         <td><button>Delete</button></td>
                     </tr>
-                    <!-- TODO: more messages will come here -->
+
                     </tbody>
+
+
                 </table>
             </div>
         </section>
@@ -173,7 +181,6 @@
                         <option value="guest">guest</option>
                         <option value="peter">Peter Ivanova (peter)</option>
                         <option value="todor">todor</option>
-                        <!-- TODO: more users will come here -->
                     </select>
                 </div>
                 <div>Message Text:</div>

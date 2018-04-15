@@ -48,13 +48,24 @@ function successGetWeather(data) {
     // console.log(data);
 
 
+let tetxToAppend = formatDate(Date(data[0].EpochTime));
+
+tetxToAppend += `<p>Времето в момента е: <strong>${weatherText}</strong></p>`;
+tetxToAppend += `<p>Температурата в момента е: ${currentTemperature} °C</p>`;
+tetxToAppend += `<p>Усеща се като: ${currentRealFeel} °C</p>`;
+tetxToAppend += `<p>Атмосферно налягане: ${airPresureTendency}</p>`;
 
 
-    console.log(formatDate(Date(data[0].EpochTime)));
-    console.log("Времето в момента е: "+weatherText);
-    console.log("Температурата в момента е: "+currentTemperature);
-    console.log("Усеща се като: "+currentRealFeel);
-    console.log("Атмосферно налягане: "+airPresureTendency);
+    // console.log(formatDate(Date(data[0].EpochTime)));
+    // console.log("Времето в момента е: "+weatherText);
+    // console.log("Температурата в момента е: "+currentTemperature);
+    // console.log("Усеща се като: "+currentRealFeel);
+    // console.log("Атмосферно налягане: "+airPresureTendency);
+
+
+    $(main).append(tetxToAppend);
+
+
 
 }
 

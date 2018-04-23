@@ -9,6 +9,7 @@ $(() => {
         $('#formSendMessage').submit(sendMessage);
         $('#linkMenuLogout').on("click", logoutUser);
 
+
         $('#linkUserHomeMyMessages').on("click", getMessages);
         $('#linkMenuMyMessages').on("click", getMessages);
 
@@ -33,14 +34,17 @@ $(() => {
 
         function prepereDropDownList(res) {
             $('#msgRecipientUsername').empty();
-            let optionsToSelect = "";
+
 
             for (let user of res) {
-                //todo Оправи Юзера <бр> да се показва
-                optionsToSelect += `<option value="${user.username}">${user.name}</option>`
-            }
 
-            $('#msgRecipientUsername').append(optionsToSelect);
+                let name = user.name;
+                let username = user.username;
+                let formattedName = formatSender(name, username);
+
+                let htmlToAppend = $('<option>').text(formattedName).attr('value', user.username);
+                $('#msgRecipientUsername').append(htmlToAppend);
+            }
         }
     }
 
@@ -250,5 +254,14 @@ $(() => {
         ajaxStart: () => $("#loadingBox").show(),
         ajaxStop: () => $('#loadingBox').fadeOut()
     });
+
+    function formatSender(name, username) {
+        if (!name)
+            return username;
+        else
+            // return '(' + name + ') ' + username;
+            return `${name} (${username})`
+    }
+
 
 });

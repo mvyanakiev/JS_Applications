@@ -71,6 +71,7 @@ function attachEvents() {
             );
         }
     }
+
     function updateElement(ev) {
         let currentId = $(ev.target).parent().attr('data-id');
         let currentDiv = $(this).parent();
@@ -110,6 +111,7 @@ function attachEvents() {
             .then(added)
             .catch(handleError);
     }
+
     function added() {
 
         (function loading() {
@@ -124,6 +126,7 @@ function attachEvents() {
 
         clearForm();
     }
+
     function clearForm() {
         $('#addForm .angler').val("");
         $('#addForm .weight').val("");
@@ -132,6 +135,7 @@ function attachEvents() {
         $('#addForm .bait').val("");
         $('#addForm .captureTime').val("")
     }
+
     function handleError(myEr) {
         console.log(myEr.status);
         console.log(myEr.statusText);

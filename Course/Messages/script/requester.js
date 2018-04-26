@@ -14,6 +14,7 @@ let requester = (() => {
     function makeRequest(method, module, endpoint, auth) {
         return req = {
             method,
+            contentType: "application/json",
             url: kinveyBaseUrl + module + '/' + kinveyAppKey + '/' + endpoint,
             headers: {
                 'Authorization': makeAuth(auth)
@@ -29,14 +30,14 @@ let requester = (() => {
     // Function to return POST promise
     function post (module, endpoint, auth, data) {
         let req = makeRequest('POST', module, endpoint, auth);
-        req.data = data;
+        req.data = JSON.stringify(data); // иначе е само = data
         return $.ajax(req);
     }
 
     // Function to return PUT promise
     function update (module, endpoint, auth, data) {
         let req = makeRequest('PUT', module, endpoint, auth);
-        req.data = data;
+        req.data = JSON.stringify(data);
         return $.ajax(req);
     }
 

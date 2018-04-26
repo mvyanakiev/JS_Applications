@@ -31,7 +31,10 @@ function attachEvents() {
                 "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
             },
             url: URL + "/biggestCatches",
-            data: dataToPost,
+
+            data: JSON.stringify(dataToPost), //data не я променяш
+            contentType: "application/json",
+
         }).then(added).catch(handleError)
 
     });

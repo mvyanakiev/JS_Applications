@@ -44,3 +44,5 @@ console.log(myTest.c); // достъпно е отвън
 myTest.c = "broke this class"; // обаче някой може да го счупи
 
 myTest.reportData(); // "с" вече е стринг и се чупи функцията
+
+

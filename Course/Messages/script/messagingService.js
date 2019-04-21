@@ -5,7 +5,6 @@ let messagesService = (() => {
         return requester.get('appdata', endPoint, '')
     }
 
-
     function loadArchiveMessage(username) {
         let endPoint = `messages?query={"sender_username":"${username}"}`;
         return requester.get('appdata', endPoint, '')
@@ -31,6 +30,4 @@ let messagesService = (() => {
         deleteMessage,
         sendingMessage,
     }
-
-
 })();

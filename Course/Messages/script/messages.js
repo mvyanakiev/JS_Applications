@@ -133,7 +133,6 @@ $(() => {
             //render table
         } else {
             //render header only
-
         }
         console.log(msg);
     }
@@ -259,9 +258,7 @@ $(() => {
         if (!name)
             return username;
         else
-            // return '(' + name + ') ' + username;
+        // return '(' + name + ') ' + username;
             return `${name} (${username})`
     }
-
-
 });

@@ -11,8 +11,6 @@ function attachEvents() {
             .filter(e => e.town != '');
 
         loadTowns(towns);
-
-
     }
 
     async function loadTowns(towns) {

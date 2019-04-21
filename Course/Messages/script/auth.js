@@ -5,10 +5,8 @@ let auth = (() => {
             username,
             password
         };
-
         return requester.post('user', 'login', 'basic', userData);
     }
-
 
     // user/register
     function register(username, password, name) {
@@ -17,7 +15,6 @@ let auth = (() => {
             password,
             name
         };
-
         return requester.post('user', '', 'basic', userData);
     }
 
@@ -26,7 +23,6 @@ let auth = (() => {
         let logoutData = {
             authtoken: sessionStorage.getItem('authtoken')
         };
-
         return requester.post('user', '_logout', 'kinvey', logoutData);
     }
 

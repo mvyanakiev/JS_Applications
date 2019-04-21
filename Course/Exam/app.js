@@ -25,8 +25,7 @@ $(() => {
 
     function checkOut(ev) {
         ev.preventDefault();
-        console.log("hui");
-
+        console.log("checkout");
     }
 
     function validateInfo(productData) {
@@ -50,7 +49,6 @@ $(() => {
         // }
 
         //todo error VALIDATION
-
     }
 
     function createReceipt(ev) {
@@ -131,7 +129,7 @@ $(() => {
         let passwordVal = $('#password-register').val();
         let passwordRepeatVal = $('#password-register-check').val();
 
-        if ((passwordVal === passwordRepeatVal) && (passwordVal.length>4) && (typeof passwordVal === "string")      ) {
+        if ((passwordVal === passwordRepeatVal) && (passwordVal.length > 4) && (typeof passwordVal === "string")) {
             auth.register(usernameVal, passwordVal)
                 .then((userInfo) => {
                     showInfo("User registration successful.");

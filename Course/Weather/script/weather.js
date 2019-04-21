@@ -19,6 +19,10 @@ function composerCurrent() {
     return BASE_URL + SUFFIX_USUAL + LOCATION + "?apikey=" + API_KEY + "&language=" + LANGUAGE + "&details=true";
 }
 
+
+// http://dataservice.accuweather.com/currentconditions/v1/51097?apikey=dXYels1ucCsV7rpmfN1EehHxUbggVkVs
+
+
 function getForecast() {
     $.ajax({
         method: "GET",

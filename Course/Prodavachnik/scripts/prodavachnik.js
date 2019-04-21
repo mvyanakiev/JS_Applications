@@ -53,7 +53,6 @@ function startApp() {
                 $('#viewEditAd').show();
                 break;
         }
-
     }
 
     function navigateTo(e) {

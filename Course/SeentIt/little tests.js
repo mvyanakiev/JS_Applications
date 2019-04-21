@@ -1,31 +1,31 @@
-let tstStr = "kura mi myTest";
-let emptytStr = "";
-let tstNmbr = 42;
+let tstStr = "myTest";
+let emptyStr = "";
+let testNumber = 42;
 
 
 console.log(typeof tstStr);
-console.log(typeof tstNmbr);
+console.log(typeof testNumber);
 
-if (typeof tstStr === "string") { // стринг може да е дума с числа вътре и всичко, което е ме/у кавички
-    console.log("vliza za string");
+if (typeof tstStr === "string") {
+    console.log("enter as string");
 }
 
-if (emptytStr === "") {
-    console.log("vliza kato prazen, ама е тъпо"); // не професионално така
-}
-
-
-if (emptytStr.length === 0) {
-    console.log("vliza kato prazen");
+if (emptyStr === "") {
+    console.log("enter as empty, but is not good");
 }
 
 
-if (typeof tstNmbr === "number") {
-    console.log("vliza za номер");
+if (emptyStr.length === 0) {
+    console.log("enter as empty");
 }
 
-if (!emptytStr) {
-    console.log("emptytStr е празен"); // проверка за празност
+
+if (typeof testNumber === "number") {
+    console.log("enter as number");
+}
+
+if (!emptyStr) {
+    console.log("emptyStr is empty");
 }
 
 function formatSender(name, username) {
@@ -36,4 +36,4 @@ function formatSender(name, username) {
 }
 
 console.log(formatSender("", "userName"));
-console.log(formatSender("ime", "userName"));
+console.log(formatSender("name", "userName"));

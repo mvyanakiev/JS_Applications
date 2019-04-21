@@ -27,7 +27,7 @@ function attachEvents() {
         $.get(URL).then(loadMessages);
 
         function loadMessages(res) {
-        // let unsortedMessages = [];
+            // let unsortedMessages = [];
             for (let obj in res) {
                 // let mess = {name:res[obj].author, content:res[obj].content, time:res[obj].timestamp};
                 // unsortedMessages.push(mess);

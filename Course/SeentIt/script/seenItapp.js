@@ -1,18 +1,9 @@
 $(() => {
 
-
-
     //event listener
     $('#registerForm').submit(registerUser);
     $('#loginForm').submit(loginUser);
     $('#logout').on("click", logoutUser());
-
-
-
-
-
-
-
 
 
     if (sessionStorage.getItem('username') === null) {
@@ -24,7 +15,7 @@ $(() => {
 
     function logOutView() {
 
-        console.log("vliza v poslednoto");
+        // console.log("enter in last");
 
         $('#profile').css("display", "none");
         $('#viewCatalog').css("display", "none");
@@ -47,8 +38,8 @@ $(() => {
         let validPass = validate.lettersAndDigits(passwordVal, 6);
 
         if (validUser === true &&
-        validPass === true &&
-        passwordVal === repeatPasVal) {
+            validPass === true &&
+            passwordVal === repeatPasVal) {
 
             auth.register(usernameVal, passwordVal, repeatPasVal)
                 .then((userInfo) => {
@@ -80,17 +71,10 @@ $(() => {
                     showInfo("Login successful successful.");
                     saveSession(userInfo);
                     $('#loginForm').find('input[name=username]').val("");
-                    $('#loginForm').find('input[name=password]').val("");                })
+                    $('#loginForm').find('input[name=password]').val("");
+                })
                 .catch(handleError);
         }
-
-
-
-
-
-
-
-
     }
 
     function userLoggedIn() {
@@ -98,8 +82,6 @@ $(() => {
         let username = sessionStorage.getItem('username');
         $('#profile').css("display", "inline");
         $('#profile > span').text(username);
-
-
     }
 
     function logoutUser() {
@@ -157,8 +139,5 @@ $(() => {
         $('#viewComments').css("display", "none");
         $('#viewWelcome').css("display", "none");
         $('#menu').css("display", "none");
-
     };
-
-
 });

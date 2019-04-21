@@ -31,18 +31,13 @@ class Test {
         console.log("Calculated Data C = " + this.c);
         console.log("Added value is: " + addedValue);
     }
-
 }
 
 
 let myTest = new Test(4, 5);
-
 myTest.reportData();
-
 console.log(myTest.c); // достъпно е отвън
-
 myTest.c = "broke this class"; // обаче някой може да го счупи
-
 myTest.reportData(); // "с" вече е стринг и се чупи функцията
 
 

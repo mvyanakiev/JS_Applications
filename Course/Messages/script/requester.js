@@ -52,4 +52,4 @@ let requester = (() => {
         update,
         remove
     }
-})()
+})();

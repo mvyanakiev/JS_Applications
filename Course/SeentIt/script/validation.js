@@ -65,18 +65,3 @@ let validate = (() => {
         lettersAndDigits,
     }
 })();
-
-//
-// let test = "thisIsTest11";
-// let test1 = "vsT";
-//
-//
-//
-//
-// let result = validate.lettersAndDigits(test, 6);
-// let result1 = validate.lettersOnly(test1, 3);
-//
-// console.log(result);
-// console.log(result1);
-//
-//

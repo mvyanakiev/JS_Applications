@@ -4,7 +4,6 @@ function attachEvents() {
 
 
     function getWeather() {
-
         $.get({
             url: "https://judgetests.firebaseio.com/locations.json",
             success: getCode,
@@ -50,9 +49,6 @@ function attachEvents() {
             weather.push(result.forecast[key]
             )
         }
-
-        // console.log(forecastSymbol(kur[0]));
-        // console.log(kur.join(" -> "));
 
         let conditionSymbol = forecastSymbol(weather[0]);
         let low = weather[1];
